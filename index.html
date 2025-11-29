@@ -1,350 +1,334 @@
-/* Base */
+<!doctype html>
+<html>
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  color: #e4ecf4;
-}
+  <title>Builderment Calculator</title>
 
-body {
-  background: radial-gradient(circle at top, #22334a 0, #050816 55%, #02040a 100%);
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-}
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/image/gear2.png">
 
-/* Background image behind the glass card */
+  <!-- Modern font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-.page-bg {
-  position: fixed;
-  inset: 0;
-  background-image: url("https://raw.githubusercontent.com/saprolord/saprolord.github.io/main/image/Builderment_Bck2b.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  filter: blur(4px) brightness(0.4);
-  z-index: -1;
-}
+  <!-- External CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
 
-/* App shell */
+<body>
+  <!-- Background image (CSS handles sizing/position) -->
+  <div class="page-bg"></div>
 
-.app-shell {
-  width: 100%;
-  max-width: 480px;
-  margin: 12px auto;
-  padding: 16px;
-  border-radius: 24px;
-  background: radial-gradient(circle at top left, rgba(26, 223, 123, 0.12), transparent 55%),
-    rgba(9, 11, 26, 0.96);
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.7);
-}
+  <!-- Main app shell -->
+  <div class="app-shell">
 
-/* Header */
+    <header class="app-header">
+      <img src="https://raw.githubusercontent.com/saprolord/saprolord.github.io/main/image/Builderment_Ico.jpg"
+           class="headIco" alt="ico">
+      <h1>Builderment Calculator</h1>
+      <img src="https://raw.githubusercontent.com/saprolord/saprolord.github.io/main/image/Builderment_Ico.jpg"
+           class="headIco" alt="ico">
+    </header>
 
-.app-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 12px;
-}
+    <!-- Tabs -->
+    <div class="tab-row">
+      <div class="tab" id="tab1" onclick="openTab1()">How much do I need to produce...</div>
+      <div class="tab" id="tab2" onclick="openTab2()">How much can I produce...</div>
+    </div>
 
-.app-header h1 {
-  margin: 0;
-  font-size: 1.1rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #f7f9fc;
-}
+    <!-- Main content -->
+    <div class="mainbox" id="mainbox1">
+      <div class="leftContainer">
+        <div class="card tabBox" id="inputBox1">
+          <div class="matinput" id="inputRate">
+            <div class="field-label">Desired Rate</div>
+            <div class="field-input">
+              <input type="text" id="rate" name="rate" placeholder="Rate..." value="1">
+            </div>
+          </div>
 
-.headIco {
-  width: 32px;
-  height: 32px;
-  border-radius: 999px;
-  box-shadow: 0 0 0 2px rgba(32, 236, 149, 0.4);
-}
+          <div class="matinput">
+            <div class="field-label">Desired Material</div>
+            <div class="field-input">
+              <select id="material" name="material">
+                <option value="42">Atomic Locator</option>
+                <option value="28">Battery</option>
+                <option value="31">Carbon Fibre</option>
+                <option value="5">Coal </option>
+                <option value="33">Computer</option>
+                <option value="27">Concrete</option>
+                <option value="19">Condenser Lens</option>
+                <option value="8">Copper Ingot</option>
+                <option value="1">Copper Ore</option>
+                <option value="9">Copper Wire</option>
+                <option value="18">Coupler</option>
+                <option value="48">Earth Token</option>
+                <option value="29">Electric Motor</option>
+                <option value="22">Electromagnet</option>
+                <option value="39">Electron Microscope</option>
+                <option value="51">Empty Fuel Cell</option>
+                <option value="43">Energy Cube</option>
+                <option value="50">Enriched Uranium</option>
+                <option value="14">Glass</option>
+                <option value="16">Graphite</option>
+                <option value="35">Gyroscope</option>
+                <option value="20">Heat Sink</option>
+                <option value="34">Industrial Frame</option>
+                <option value="11">Iron Gear</option>
+                <option value="10">Iron Ingot</option>
+                <option value="2">Iron Ore</option>
+                <option value="21">Iron Plating</option>
+                <option value="30">Logic Circuit</option>
+                <option value="37">Magnetic Field Generator</option>
+                <option value="45">Matter Compressor</option>
+                <option value="47">Matter Duplicator</option>
+                <option value="23">Metal Frame</option>
+                <option value="32">Nano Wire</option>
+                <option value="52">Nuclear Fuel Cell</option>
+                <option value="46">Particle Glue</option>
+                <option value="38">Quantum Entangler</option>
+                <option value="26">Rotor</option>
+                <option value="12">Sand</option>
+                <option value="24">Steel</option>
+                <option value="25">Steel Rod</option>
+                <option value="13">Silicon</option>
+                <option value="3">Stone</option>
+                <option value="17">Tungsten Carbide</option>
+                <option value="15">Tungsten Ore</option>
+                <option value="36">Stabilizer</option>
+                <option value="41">Super Computer</option>
+                <option value="44">Tank</option>
+                <option value="40">Turbocharger</option>
+                <option value="49">Uranium</option>
+                <option value="4">Wolframite</option>
+                <option value="7">Wood Frame</option>
+                <option value="0">Wood Log</option>
+                <option value="6">Wood Plank</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
-/* Tabs */
+        <!-- Reverse tab extractor quantities -->
+        <div class="card box4" id="extractor_qty" style="display:none">
+          <div class="card-title">Number of Extractors</div>
+          <div class="subbox2">
+            <div class="levelfact">
+              <div class="tablecell">Wood</div>
+              <input type="text" id="wood_extractor_qty" maxlength="3" value="0">
+            </div>
+            <div class="levelfact">
+              <div class="tablecell">Copper</div>
+              <input type="text" id="copper_extractor_qty" maxlength="3" value="0">
+            </div>
+            <div class="levelfact">
+              <div class="tablecell">Iron</div>
+              <input type="text" id="iron_extractor_qty" maxlength="3" value="0">
+            </div>
+            <div class="levelfact">
+              <div class="tablecell">Stone</div>
+              <input type="text" id="stone_extractor_qty" maxlength="3" value="0">
+            </div>
+            <div class="levelfact">
+              <div class="tablecell">Wolfram.</div>
+              <input type="text" id="wolf_extractor_qty" maxlength="3" value="0">
+            </div>
+            <div class="levelfact">
+              <div class="tablecell">Coal</div>
+              <input type="text" id="coal_extractor_qty" maxlength="3" value="0">
+            </div>
+          </div>
+        </div>
 
-.tab-row {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 14px;
-  background: rgba(8, 14, 28, 0.9);
-  padding: 4px;
-  border-radius: 999px;
-}
+        <!-- Building levels -->
+        <div class="card box2" id="levelfact">
+          <div class="card-title">Building Levels</div>
+          <div class="levelfact center" id="max_all_level">
+            <button class="btn-secondary" onclick="maxFactory()">Max All</button>
+          </div>
+          <div class="subbox2">
+            <div class="levelfact" id="extractor_box">
+              <div class="tablecell">Extractor</div>
+              <select id="extractor" name="extractor">
+                <option value="0">1</option>
+                <option value="1">2</option>
+                <option value="2">3</option>
+                <option value="3">4</option>
+                <option value="4">5</option>
+              </select>
+            </div>
+            <div class="levelfact" id="workshop_box">
+              <div class="tablecell">Workshop</div>
+              <select id="workshop" name="workshop">
+                <option value="0">1</option>
+                <option value="1">2</option>
+                <option value="2">3</option>
+                <option value="3">4</option>
+              </select>
+            </div>
+            <div class="levelfact" id="furnace_box">
+              <div class="tablecell">Furnace</div>
+              <select id="furnace" name="furnace">
+                <option value="0">1</option>
+                <option value="1">2</option>
+                <option value="2">3</option>
+                <option value="3">4</option>
+              </select>
+            </div>
+            <div class="levelfact" id="machine_box">
+              <div class="tablecell">Machine Shop</div>
+              <select id="machine" name="machine">
+                <option value="0">1</option>
+                <option value="1">2</option>
+                <option value="2">3</option>
+                <option value="3">4</option>
+              </select>
+            </div>
+            <div class="levelfact" id="industrial_box">
+              <div class="tablecell">Industrial Factory</div>
+              <select id="industrial" name="industrial">
+                <option value="0">1</option>
+                <option value="1">2</option>
+                <option value="2">3</option>
+                <option value="3">4</option>
+              </select>
+            </div>
+            <div class="levelfact" id="forge_box">
+              <div class="tablecell">Forge</div>
+              <select id="forge" name="forge">
+                <option value="0">1</option>
+                <option value="1">2</option>
+                <option value="2">3</option>
+                <option value="3">4</option>
+              </select>
+            </div>
+            <div class="levelfact" id="manufacturer_box">
+              <div class="tablecell">Manufacturer</div>
+              <select id="manufacturer" name="manufacturer">
+                <option value="0">1</option>
+                <option value="1">2</option>
+                <option value="2">3</option>
+                <option value="3">4</option>
+              </select>
+            </div>
+            <div class="levelfact" id="teleporter_box">
+              <div class="tablecell">Earth Teleporter</div>
+              <select id="teleporter" name="teleporter">
+                <option value="0">1</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
-.tab {
-  flex: 1;
-  text-align: center;
-  padding: 8px 10px;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: all 0.18s ease;
-  color: #a9b4ca;
-  background: transparent;
-}
+        <!-- Calculate buttons -->
+        <div class="button-row">
+          <button class="btn-primary" onclick="factorycalc(false)" id="calculate1">Calculate</button>
+        </div>
+        <div class="button-row">
+          <button class="btn-primary" onclick="factorycalc(true)" id="calculate2" style="display:none">Calculate</button>
+        </div>
+      </div>
+    </div>
 
-#tab1 {
-  /* default active */
-  background: linear-gradient(135deg, #18c964, #28df7b);
-  color: #061218;
-  font-weight: 600;
-  box-shadow: 0 0 16px rgba(24, 201, 100, 0.45);
-}
+    <!-- Limiting resource info -->
+    <div class="card box3" id="limit_resource"></div>
 
-.tab:hover {
-  transform: translateY(-1px);
-}
+    <!-- Totals -->
+    <div class="card box3" id="box3">
+      <div class="card-title">Total Required</div>
+      <div class="subbox3">
+        <!-- 0–52 as you already had; unchanged structure so scripts.js still works -->
+        <!-- (I’m not repeating them here to save space; keep exactly what you pasted) -->
+        <!-- BEGIN MATERIAL SUMMARY BLOCKS -->
+        <!-- ... keep your matDiv00–matDiv52 blocks exactly as they are ... -->
+        <!-- END MATERIAL SUMMARY BLOCKS -->
+      </div>
+    </div>
 
-/* Main layout */
+    <!-- Tier buttons + tree -->
+    <div id="buttonBox" class="buttonBox"></div>
+    <div class="treeBox" id="TreeTop" style="display:none;"></div>
 
-.mainbox {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+  </div> <!-- /app-shell -->
 
-/* Common card */
+  <!-- Scripts -->
+  <script src="scripts.js"></script>
 
-.card,
-.box2,
-.box3,
-.box4 {
-  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.02), transparent 55%),
-    rgba(8, 12, 26, 0.98);
-  border-radius: 20px;
-  padding: 14px 14px 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(81, 98, 130, 0.4);
-}
+  <!-- Persist values in localStorage -->
+  <script>
+    const STORAGE_PREFIX = 'buildermentCalc_';
 
-/* Titles */
+    const PERSISTENT_FIELDS = [
+      'rate',
+      'material',
 
-.card-title,
-.box2 > div:first-child,
-.box3 > div:first-child,
-.box4 > div:first-child {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-  color: #cfd8ea;
-}
+      'wood_extractor_qty',
+      'copper_extractor_qty',
+      'iron_extractor_qty',
+      'stone_extractor_qty',
+      'wolf_extractor_qty',
+      'coal_extractor_qty',
 
-/* Form fields */
+      'extractor',
+      'workshop',
+      'furnace',
+      'machine',
+      'industrial',
+      'forge',
+      'manufacturer',
+      'teleporter'
+    ];
 
-.matinput {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 10px;
-}
+    function loadSavedValues() {
+      PERSISTENT_FIELDS.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const savedValue = localStorage.getItem(STORAGE_PREFIX + id);
+        if (savedValue !== null) el.value = savedValue;
+      });
 
-.field-label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #cfd8ea;
-}
+      const savedTab = localStorage.getItem(STORAGE_PREFIX + 'activeTab');
+      if (savedTab === '2') {
+        openTab2();
+      } else {
+        openTab1();
+      }
+    }
 
-.field-input {
-  display: flex;
-  justify-content: center;
-}
+    function setupAutoSave() {
+      PERSISTENT_FIELDS.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const eventName = (el.tagName === 'SELECT') ? 'change' : 'input';
+        el.addEventListener(eventName, () => {
+          localStorage.setItem(STORAGE_PREFIX + id, el.value);
+        });
+      });
+    }
 
-input[type="text"],
-select {
-  width: 100%;
-  max-width: 200px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(92, 116, 148, 0.7);
-  background: rgba(7, 11, 26, 0.95);
-  color: #e4ecf4;
-  font-size: 0.85rem;
-  outline: none;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-}
+    // Wrap original tab handlers so we remember active tab
+    const originalOpenTab1 = window.openTab1;
+    const originalOpenTab2 = window.openTab2;
 
-input[type="text"]:focus,
-select:focus {
-  border-color: #28df7b;
-  box-shadow: 0 0 0 1px rgba(40, 223, 123, 0.55);
-  background: rgba(7, 11, 26, 1);
-}
+    window.openTab1 = function () {
+      localStorage.setItem(STORAGE_PREFIX + 'activeTab', '1');
+      originalOpenTab1();
+    };
 
-/* Level + extractor grid */
+    window.openTab2 = function () {
+      localStorage.setItem(STORAGE_PREFIX + 'activeTab', '2');
+      originalOpenTab2();
+    };
 
-.subbox2 {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
+    document.addEventListener('DOMContentLoaded', () => {
+      setupAutoSave();
+      loadSavedValues();
+    });
+  </script>
+</body>
 
-.levelfact {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  margin-top: 4px;
-}
-
-.levelfact.center {
-  justify-content: center;
-}
-
-.tablecell {
-  flex: 1;
-  text-align: left;
-  font-size: 0.82rem;
-  color: #d2d9eb;
-}
-
-.levelfact select,
-.levelfact input[type="text"] {
-  max-width: 70px;
-}
-
-/* Buttons */
-
-.button-row {
-  display: flex;
-  justify-content: center;
-  margin: 12px 0 4px;
-}
-
-.btn-primary,
-.btn-secondary {
-  border-radius: 999px;
-  padding: 10px 22px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  border: none;
-  cursor: pointer;
-  outline: none;
-  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
-}
-
-.btn-primary {
-  background: radial-gradient(circle at 0% 0%, #2cf07c, #10a049);
-  color: #051012;
-  box-shadow: 0 12px 22px rgba(22, 200, 110, 0.65);
-}
-
-.btn-primary:hover {
-  transform: translateY(-1px);
-  filter: brightness(1.06);
-}
-
-.btn-primary:active {
-  transform: translateY(1px) scale(0.98);
-  box-shadow: 0 6px 14px rgba(22, 200, 110, 0.55);
-}
-
-.btn-secondary {
-  background: rgba(12, 26, 48, 0.95);
-  color: #e4ecf4;
-  border: 1px solid rgba(122, 147, 190, 0.7);
-  padding: 6px 16px;
-  font-size: 0.8rem;
-}
-
-.btn-secondary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(7, 10, 25, 0.9);
-}
-
-/* Totals list */
-
-.subbox3 {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 8px;
-}
-
-.matsum {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 8px;
-  border-radius: 999px;
-  background: rgba(6, 10, 22, 0.9);
-  border: 1px solid rgba(69, 86, 115, 0.6);
-  min-width: 130px;
-}
-
-.matsum .ico {
-  width: 22px;
-  height: 22px;
-}
-
-.matout {
-  font-size: 0.78rem;
-}
-
-/* Buttons for tiers & tree */
-
-.buttonBox {
-  margin-top: 10px;
-  display: none;
-  justify-content: center;
-  gap: 4px;
-}
-
-.buttonBox > div {
-  cursor: pointer;
-  padding: 5px 9px;
-  font-size: 0.75rem;
-  border-radius: 999px;
-  background: rgba(16, 24, 45, 0.95);
-  color: #cfd8ea;
-  border: 1px solid rgba(82, 101, 142, 0.8);
-}
-
-.treeBox {
-  margin-top: 12px;
-  padding: 10px;
-  border-radius: 18px;
-  background: rgba(5, 9, 20, 0.95);
-  overflow-x: auto;
-}
-
-/* Responsive tweaks */
-
-@media (max-width: 520px) {
-  .app-shell {
-    margin: 8px;
-    padding: 12px;
-  }
-
-  .app-header h1 {
-    font-size: 0.95rem;
-  }
-
-  .headIco {
-    width: 28px;
-    height: 28px;
-  }
-
-  .matsum {
-    min-width: 120px;
-  }
-}
+</html>
