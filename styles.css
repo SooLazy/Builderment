@@ -1,450 +1,453 @@
-input[type=text],
-	select {
-		width: 100%;
-		padding:8px 0px;
-		display: inline-block;
-		border: 1px solid #ccc;
-		border-radius: 5px;
-		box-sizing: border-box;
-    min-width: 45px;
-    text-align: center;
-	}
+/* ===== Global ===== */
 
-	button {
-    background-color: #10a049;
-		color: white;
-		padding: 8px 2px;
-		margin: 0px;
-		border: 1px solid black;
-		border-radius: 8px;
-		cursor: pointer;
-		box-sizing: border-box;
-	}
-
-	button:hover {
-    background: #37c971;
-    font-weight: bold;
-	}
-
-.buttonBox{
-  display:flex;
-  width: 100%;
-  justify-content: center;
-}
-
-.buttonStart{
-  display:flex;
-  background-color: #10a049;
-  color: white;
-  height: 30px;
-  width: 40px;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid black;
-  border-radius: 8px 0px 0px 8px;
-  cursor: pointer;
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-.buttonMid{
-  display:flex;
-  background-color: #10a049;
-  color: white;
-  height: 30px;
-  width: 40px;
-  justify-content: center;
-  align-items: center;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-  cursor: pointer;
-  box-sizing: border-box;
+html, body {
+  margin: 0;
+  padding: 0;
 }
 
-.buttonEnd{
-  display:flex;
-  background-color: #10a049;
-  color: white;
-  height: 30px;
-  width: 40px;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid black;
-  border-radius: 0px 8px 8px 0px;
-  cursor: pointer;
-  box-sizing: border-box;
-}
+body {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #f3f4f6;
+  min-height: 100vh;
 
-.buttonStart:hover{
-  background: #37c971;
-  font-weight: bold;
-}
-
-.buttonMid:hover{
-  background: #37c971;
-  font-weight: bold;
-}
-
-.buttonEnd:hover{
-  background: #37c971;
-  font-weight: bold;
-}
-
-.mainbox{
+  /* Background image from your original inline style */
+  background-image: linear-gradient(135deg, rgba(15,23,42,0.8), rgba(22,163,74,0.75)),
+                    url("https://raw.githubusercontent.com/saprolord/saprolord.github.io/main/image/Builderment_Bck2b.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-  align-items: stretch;
   justify-content: center;
-  box-sizing: border-box;
-  border: 1px solid black;
-  background-color: #f2f2f281;
-  padding: 5px;
-  gap:5px;
+  align-items: flex-start;
 }
+
+/* Layout wrapper */
+body > div:first-of-type {
+  /* The top logo row was the first div – we’ll wrap everything visually */
+}
+
+/* Main app container */
+.app-shell {
+  width: 100%;
+  max-width: 1100px;
+  margin: 24px auto 48px auto;
+  padding: 24px 20px 32px 20px;
+  background: rgba(15, 23, 42, 0.85);
+  border-radius: 18px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+  backdrop-filter: blur(16px);
+}
+
+/* Make sure your existing top logo row still looks centred */
+.headIco {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  box-shadow: 0 0 0 2px rgba(148, 163, 184, 0.6);
+}
+
+/* Header title text */
+body > div:nth-of-type(1) {
+  margin-bottom: 10px;
+  color: #e5e7eb;
+}
+
+/* Center that header row inside the app shell */
+body > div:nth-of-type(1),
+body > div:nth-of-type(2),
+body > div:nth-of-type(3),
+.mainbox,
+.box3,
+.buttonBox,
+.treeBox {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== Tabs ===== */
 
 .tab {
-  display: flex;
-  background-color: #748f7e;
-  color: white;
-  padding: 8px 8px;
-  margin-right: 5px;
-  border: 1px solid black;
-  border-bottom: none;
-  border-radius: 8px 8px 0px 0px;
-  cursor: pointer;
-  box-sizing: border-box;
-  width: 260px;
-  justify-content: center;
-  font-family: "Calibri";
-}
-
-.tab:hover{
-  background: #37c971;
-  font-weight: bold;
-}
-
-.tabBox{
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-width: 35%;
-align-items: center;
-box-sizing: border-box;
-background: #f2f2f2;
-border: 1px solid black;
-padding:10px;
-gap:10px;
-}
-
-.matinput{
-display: flex;
-flex-direction: row;
-background: none;
-height: 30px;
-padding: 5px;
-align-items: center;
-width: 170px;
-justify-content: center;
-box-sizing: border-box;
-}
-
-.leftContainer{
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  width: 40%;
-  gap:5px;
-}
-
-.box2{
-display: flex;
-flex-direction: column;
-background: #f2f2f2;
-align-items: center;
-justify-content: center;
-width: 58%;
-border: 1px solid black;
-box-sizing: border-box;
-}
-
-.box4{
-display: flex;
-flex-direction: column;
-background: #f2f2f2;
-align-items: center;
-justify-content: center;
-width: 100%;
-border: 1px solid black;
-box-sizing: border-box;
-padding: 5px;
-}
-
-.subbox2{
-display: flex;
-flex-wrap: wrap;
-flex-direction: row;
-justify-content: center;
-}
-
-.levelfact{
-display: flex;
-flex-direction: row;
-height: 30px;
-padding: 5px;
-justify-content:center;
-width: 170px ;
-align-items: center;
-}
-
-.box3{
-display: none;
-flex-direction: column;
-background: #f2f2f2;
-align-items: center;
-justify-content: center;
-width: 100%;
-border: 1px solid black;
-box-sizing: border-box;
-}
-
-.subbox3{
-display: flex;
-flex-wrap: wrap;
-flex-direction: row; 
-justify-content: center;
-}
-
-.matsum{
-	display:flex;
-  align-items: center;
-	min-width:54px;
-}
-
-.matout{
-  display: flex;
-  min-width: 38px;
-}
-
-.ico{
-	max-width: 25px;
-}
-
-.headIco{
-  max-width: 50px;
-  max-height:50px;
-  border: 1px solid green
-}
-
-.treeBox{
-  display: flex;
-  border: 0px solid black;
-  padding: 5px;
-  /*overflow-x: auto;*/
-  /*width: 100%;*/
-}
-
-.matBox{
-  display: flex;
-  cursor: pointer;
-}
-
-.matIco{
-  display:flex;
-  width:30px;
-  height:70px;
-  box-sizing: border-box;
-  border: 1px solid black;
-  border-right: none;
-  align-content: center;
-  align-items: center;
-}
-
-.plusMinus{
-  display:flex;
-  width:15px;
-  height:70px;
-  border: none;
-  justify-content: center;
-  align-items: center;
-}
-
-.matDetail{
-  display: flex;
-  flex-wrap: wrap;
-  width: 190px;
-  height:85px;
-}
-
-.matName{
-  display: flex;
-  align-items:center;
-  justify-content:center;
-  width:150px;
-  height: 35px;
-  border: 1px solid black;
-  background:  rgb(199, 226, 200);
-  box-sizing: border-box;
-}
-
-.factoryName{
-  display: flex;
-  align-items:center;
-  justify-content:center;
-  width:150px;
-  height: 35px;
-  border: 1px solid black;
-  border-top: none;
-  background:  rgb(221, 211, 165);
-  box-sizing: border-box;
+  flex: 1;
+  padding: 10px 12px;
   text-align: center;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #e5e7eb;
+  background: rgba(31, 41, 55, 0.9);
+  border-radius: 12px 12px 0 0;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+  border: 1px solid rgba(75, 85, 99, 0.8);
+  border-bottom: none;
 }
 
-.matRate{
-  display: flex;
-  align-items:center;
-  justify-content:center;
-  width:40px;
-  height: 35px;
-  border: 1px solid black;
-  border-left: none;
-  background:  #FFFFFF;
-  box-sizing: border-box;
+.tab + .tab {
+  margin-left: 4px;
 }
 
-.factoryNum{
-  display: flex;
-  align-items:center;
-  justify-content:center;
-  width:40px;
-  height: 35px;
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
-  background:  #FFFFFF;
-  box-sizing: border-box;
+.tab:hover {
+  background: rgba(55, 65, 81, 0.95);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.35);
 }
 
-.spacer{
-  display: flex;
-  width: 190px;
-  height: 15px;
-
+#tab1 {
+  border-top-left-radius: 18px;
 }
 
-.branchBox{
+#tab2 {
+  border-top-right-radius: 18px;
+}
+
+/* Selected tab (you already manipulate background/transform in JS) */
+#tab1,
+#tab2 {
+  /* leave colors to JS overrides; this just smooths things */
+}
+
+/* Tab row container */
+body > div:nth-of-type(2) {
+  max-width: 1100px;
+  margin-top: 16px;
+}
+
+/* ===== Main content boxes ===== */
+
+.mainbox {
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(55, 65, 81, 0.9);
+  border-top: none;
+  border-radius: 0 0 18px 18px;
+  padding: 18px 16px 22px 16px;
+  margin-bottom: 18px;
   display: flex;
-  align-content: stretch;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Left side inputs */
+.leftContainer {
+  flex: 1 1 320px;
+  min-width: 280px;
+}
+
+/* Building levels panel */
+.box2 {
+  flex: 0 0 280px;
+  max-width: 320px;
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 14px;
+  border: 1px solid rgba(55,65,81,0.9);
+  padding: 12px 14px 16px 14px;
+}
+
+/* Extractor qty panel (when visible) */
+.box4 {
+  margin-top: 14px;
+  background: rgba(15,23,42,0.9);
+  border-radius: 14px;
+  border: 1px solid rgba(55,65,81,0.9);
+  padding: 10px 12px 12px 12px;
+}
+
+/* Titles */
+.box2 > div:first-child,
+.box4 > div:first-child,
+.box3 > div:first-child {
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  color: #9ca3af;
+}
+
+/* Sub-box layouts */
+.subbox2 {
+  margin-top: 10px;
+  display: flex;
   flex-direction: column;
-  width: 10px;
+  gap: 6px;
 }
 
-.branchOut{
-  width:10px;
-  height: 35px;
-  border-bottom: 1px solid black;
-  box-sizing: border-box;
-}
-
-.branchSimple{
-  width:10px;
-  height: 35px;
-  border-bottom: 1px solid black;
-  box-sizing: border-box;
-}
-
-.branchEnd{
-  width:10px;
-  height: 35px;
-  border-bottom: 1px solid black;
-  border-left: 1px solid black;
-  box-sizing: border-box;
-}
-
-.branchDown{
-  width:10px;
-  flex-grow: 2;
-  border-left: 1px solid black;
-  box-sizing: border-box;
-}
-
-.matRecipe{
+.levelfact {
   display: flex;
-  box-sizing: border-box;
-}
-
-.matChildren{
-  display: flex;
-  flex-direction:column;
-  box-sizing: border-box;
-}
-
-.treeLevel{
-  display: flex;
-  box-sizing: border-box;
-  }
-
-.tablebox{
-  display:flex;
-  flex-direction: column;
-  border:0px solid black;
-  width: 90%;
-}
-.tablerow{
-  display: flex;
-  flex-direction: row;
-  border:0px solid black;
-  flex-grow: 1;
-  
-}
-.tablecell{
-  display:flex;
-  width: 80%;
-  height:40px;
-  border: 0px solid black; 
   align-items: center;
-  justify-content: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: #e5e7eb;
 }
 
-@media screen and (max-width: 800px){
-  .mainbox{
-  flex-direction: column;
-  justify-content: space-around;
+.tablecell {
+  min-width: 80px;
+  text-align: right;
+  padding-right: 4px;
+}
+
+/* Inputs & selects */
+input[type="text"],
+select {
+  background: rgba(15, 23, 42, 0.95);
+  color: #e5e7eb;
+  border-radius: 8px;
+  border: 1px solid rgba(55,65,81,0.9);
+  padding: 4px 6px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+input[type="text"]:focus,
+select:focus {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 1px rgba(34,197,94,0.7);
+  background: rgba(15,23,42,1);
+}
+
+select {
+  appearance: none;
+}
+
+/* Dropdown caret fallback for some browsers */
+select::-ms-expand {
+  display: none;
+}
+
+/* Rate & material blocks */
+.matinput {
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 14px;
+  border: 1px solid rgba(55,65,81,0.9);
+  padding: 8px 10px 10px 10px;
+  margin-bottom: 10px;
+}
+
+/* ===== Buttons ===== */
+
+button {
+  cursor: pointer;
+  border-radius: 999px;
+  border: none;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #f9fafb;
+  box-shadow: 0 12px 30px rgba(22,163,74,0.4);
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    filter 0.12s ease,
+    background 0.12s ease;
+}
+
+button:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 16px 40px rgba(22,163,74,0.55);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 8px 20px rgba(22,163,74,0.35);
+}
+
+#calculate1,
+#calculate2 {
+  margin-top: 10px;
+}
+
+/* Max All button */
+#max_all_level button {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+}
+
+/* ===== Total required / results box ===== */
+
+.box3 {
+  margin-top: 16px;
+  padding: 12px 14px 16px 14px;
+  background: rgba(15,23,42,0.9);
+  border-radius: 14px;
+  border: 1px solid rgba(55,65,81,0.9);
+  color: #e5e7eb;
+}
+
+/* Limiting resource banner (same .box3) */
+#limit_resource {
+  margin-top: 16px;
+  background: linear-gradient(135deg, rgba(239,68,68,0.12), rgba(252,211,77,0.12));
+  border-color: rgba(248,113,113,0.8);
+  color: #fecaca;
+  font-size: 0.9rem;
+}
+
+/* Total results grid */
+.subbox3 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.matsum {
+  display: flex;
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: 999px;
+  background: rgba(17,24,39,0.9);
+  border: 1px solid rgba(55,65,81,0.85);
+  min-width: 110px;
+}
+
+.matsum .ico {
+  margin-right: 6px;
+}
+
+.matout {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* ===== Tree / recipe view ===== */
+
+.treeBox {
+  margin-top: 18px;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(15,23,42,0.92);
+  border: 1px solid rgba(55,65,81,0.9);
+  overflow-x: auto;
+}
+
+.treeLevel {
+  display: flex;
+  align-items: center;
+}
+
+/* Material detail nodes */
+.matBox {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(15,23,42,1);
+  border-radius: 999px;
+  border: 1px solid rgba(55,65,81,0.9);
+  padding: 4px 8px;
+  margin: 4px 8px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+}
+
+.matDetail {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.matName {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.matRate,
+.factoryName,
+.factoryNum {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.factoryNum {
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+.branchBox {
+  display: flex;
+  align-items: center;
+}
+
+.branchSimple,
+.branchDown,
+.branchEnd {
+  /* You likely already style these in your original CSS;
+     we keep them subtle here. */
+}
+
+/* Expand/collapse +/- */
+.plusMinus img {
+  display: block;
+}
+
+/* Tier buttons */
+.buttonBox {
+  display: none;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 16px;
+}
+
+.buttonStart,
+.buttonMid,
+.buttonEnd {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(31,41,55,0.9);
+  border: 1px solid rgba(75,85,99,0.9);
+  color: #e5e7eb;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.12s ease;
+}
+
+.buttonStart:hover,
+.buttonMid:hover,
+.buttonEnd:hover {
+  background: rgba(55,65,81,0.95);
+  transform: translateY(-1px);
+}
+
+/* ===== Responsive tweaks ===== */
+
+@media (max-width: 800px) {
+  body {
+    align-items: stretch;
   }
 
-  .tabBox{
-	flex-direction: row;
-  width: 100%;
-  }
-  .leftContainer{
-    width:100%
-  }
-
-  .box2{
-  flex-direction: column;
-  width: 100%;
-  }
-
-  .box3{
-  width: 100%;
-  margin: 5px 0px;
-  padding: 0px;
-  }
-
-  .levelfact{
-    width: 153px;
-  }
-
-  .tablebox{
-    flex-direction: row;
-    width: 150px;
-  }
-
-  .tablerow{
+  .mainbox {
     flex-direction: column;
-    flex-grow:1;
   }
 
-  .tablecell{
-    width: 60px;
+  .box2 {
+    max-width: 100%;
+  }
+
+  .matsum {
+    min-width: calc(50% - 8px);
+  }
+}
+
+@media (max-width: 520px) {
+  .matsum {
+    min-width: 100%;
+  }
+
+  .tab {
+    font-size: 0.8rem;
+    padding: 8px 6px;
   }
 }
