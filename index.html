@@ -524,6 +524,89 @@ background-size: 100% ;
 
 <div class="treeBox" id="TreeTop" style="display:none;"></div> 
 
+<script>
+  // Prefix so we don't clash with anything else in localStorage
+  const STORAGE_PREFIX = 'buildermentCalc_';
+
+  // All the fields we want to persist
+  const PERSISTENT_FIELDS = [
+    'rate',
+    'material',
+
+    // Extractor quantities
+    'wood_extractor_qty',
+    'copper_extractor_qty',
+    'iron_extractor_qty',
+    'stone_extractor_qty',
+    'wolf_extractor_qty',
+    'coal_extractor_qty',
+
+    // Building levels
+    'extractor',
+    'workshop',
+    'furnace',
+    'machine',
+    'industrial',
+    'forge',
+    'manufacturer',
+    'teleporter'
+  ];
+
+  function loadSavedValues() {
+    PERSISTENT_FIELDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const savedValue = localStorage.getItem(STORAGE_PREFIX + id);
+      if (savedValue !== null) {
+        // Works for both <input> and <select>
+        el.value = savedValue;
+      }
+    });
+
+    // Restore last active tab (1 or 2)
+    const savedTab = localStorage.getItem(STORAGE_PREFIX + 'activeTab');
+    if (savedTab === '2') {
+      openTab2();
+    } else {
+      // Default to tab 1
+      openTab1();
+    }
+  }
+
+  function setupAutoSave() {
+    PERSISTENT_FIELDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const eventName = (el.tagName === 'SELECT') ? 'change' : 'input';
+      el.addEventListener(eventName, () => {
+        localStorage.setItem(STORAGE_PREFIX + id, el.value);
+      });
+    });
+  }
+
+  // Hook tab changes so we remember which one was last used
+  const originalOpenTab1 = window.openTab1;
+  const originalOpenTab2 = window.openTab2;
+
+  window.openTab1 = function () {
+    localStorage.setItem(STORAGE_PREFIX + 'activeTab', '1');
+    originalOpenTab1();
+  };
+
+  window.openTab2 = function () {
+    localStorage.setItem(STORAGE_PREFIX + 'activeTab', '2');
+    originalOpenTab2();
+  };
+
+  // Initialise once DOM is ready
+  document.addEventListener('DOMContentLoaded', () => {
+    setupAutoSave();
+    loadSavedValues();
+  });
+</script>
+	
 </body>
 
 </html>
