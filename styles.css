@@ -461,7 +461,48 @@ select:focus {
   font-weight: 600;
   color: #f7f9fc;
 }
+/* ===== Tree layout alignment ===== */
 
+.treeBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Each horizontal row in the tree */
+.treeLevel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Column of children under a parent */
+.matChildren {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* The little line/branch column */
+.branchBox {
+  flex: 0 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Material card in the tree */
+.matBox {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  min-height: 70px;        /* makes each row same height so branches line up */
+}
+
+/* Make the inner details stretch to full width of the card */
+.matDetail {
+  width: 100%;
+}
 .spacer {
   display: none;
 }
