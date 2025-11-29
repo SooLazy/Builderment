@@ -326,7 +326,137 @@ select:focus {
   background: rgba(5, 9, 20, 0.95);
   overflow-x: auto;
 }
+/* =========================
+   TREE VIEW LAYOUT
+   ========================= */
 
+.treeBox {
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 18px;
+  background: rgba(5, 9, 20, 0.95);
+  overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Each "tier" across the tree */
+.treeLevel {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: 40px;
+}
+
+/* Branch graphics between parent and children */
+
+.branchBox {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-end;
+  width: 32px;
+}
+
+/* horizontal line:  ─  */
+.branchSimple {
+  flex: 1;
+  border-bottom: 2px solid rgba(96, 118, 160, 0.8);
+}
+
+/* vertical continuation:  │  */
+.branchDown {
+  width: 0;
+  border-left: 2px solid rgba(96, 118, 160, 0.8);
+  margin: 0 auto;
+}
+
+/* corner end:  └  */
+.branchEnd {
+  flex: 1;
+  border-bottom: 2px solid rgba(96, 118, 160, 0.8);
+  border-left: 2px solid rgba(96, 118, 160, 0.8);
+  border-bottom-left-radius: 12px;
+  margin-left: auto;
+}
+
+/* Material box (clickable, with +/-) */
+
+.matBox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 14px;
+  background: radial-gradient(circle at top left,
+              rgba(255, 255, 255, 0.02),
+              transparent 60%)
+              rgba(10, 14, 30, 0.98);
+  border: 1px solid rgba(78, 100, 142, 0.8);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+  min-width: 210px;
+}
+
+.matBox .plusMinus img {
+  display: block;
+}
+
+/* Children container (stack of sub-materials) */
+
+.matChildren {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-left: 40px; /* offset under the branch */
+}
+
+/* The inner detail row inside a material */
+
+.matDetail {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) 0.7fr 1.2fr 0.7fr;
+  align-items: center;
+  column-gap: 8px;
+  font-size: 0.8rem;
+}
+
+.matName {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  color: #e6edf8;
+}
+
+.matRate {
+  text-align: right;
+  color: #cfd8ea;
+}
+
+.factoryName {
+  color: #9aa6c2;
+  font-size: 0.78rem;
+}
+
+.factoryNum {
+  text-align: right;
+  font-weight: 600;
+  color: #f7f9fc;
+}
+
+.spacer {
+  display: none; /* not needed with grid layout */
+}
+
+/* Small icons inside the tree */
+.matDetail .ico {
+  width: 20px;
+  height: 20px;
+}
 /* Responsive tweaks */
 
 @media (max-width: 520px) {
