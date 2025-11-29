@@ -416,15 +416,23 @@ select:focus {
 
 /* The inner detail row inside a material */
 
+/* Layout inside each material card in the tree */
 .matDetail {
   display: grid;
-  grid-template-columns: minmax(0, 1.6fr) 0.7fr 1.2fr 0.7fr;
+  grid-template-columns: minmax(0, 1.7fr) auto;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "name rate"
+    "factory qty";
+  column-gap: 6px;
+  row-gap: 2px;
   align-items: center;
-  column-gap: 8px;
   font-size: 0.8rem;
 }
 
+/* Top-left: icon + material name */
 .matName {
+  grid-area: name;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -432,26 +440,36 @@ select:focus {
   color: #e6edf8;
 }
 
+/* Top-right: rate */
 .matRate {
+  grid-area: rate;
   text-align: right;
   color: #cfd8ea;
 }
 
+/* Bottom-left: factory name */
 .factoryName {
+  grid-area: factory;
   color: #9aa6c2;
-  font-size: 0.78rem;
+  font-size: 0.75rem;
 }
 
+/* Bottom-right: number of factories */
 .factoryNum {
+  grid-area: qty;
   text-align: right;
   font-weight: 600;
   color: #f7f9fc;
 }
 
 .spacer {
-  display: none; /* not needed with grid layout */
+  display: none;
 }
 
+.matDetail .ico {
+  width: 20px;
+  height: 20px;
+}
 /* Small icons inside the tree */
 .matDetail .ico {
   width: 20px;
