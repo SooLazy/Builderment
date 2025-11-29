@@ -1,4 +1,4 @@
-/* ===== Global ===== */
+/* Base */
 
 *,
 *::before,
@@ -6,174 +6,191 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
+  height: 100%;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: #e4ecf4;
 }
 
 body {
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #f3f4f6;
-  min-height: 100vh;
+  background: radial-gradient(circle at top, #22334a 0, #050816 55%, #02040a 100%);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
 
-  /* Background image from your original inline style */
-  background-image: linear-gradient(135deg, rgba(15,23,42,0.8), rgba(22,163,74,0.75)),
-                    url("https://raw.githubusercontent.com/saprolord/saprolord.github.io/main/image/Builderment_Bck2b.png");
+/* Background image behind the glass card */
+
+.page-bg {
+  position: fixed;
+  inset: 0;
+  background-image: url("https://raw.githubusercontent.com/saprolord/saprolord.github.io/main/image/Builderment_Bck2b.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  filter: blur(4px) brightness(0.4);
+  z-index: -1;
 }
 
-/* Layout wrapper */
-body > div:first-of-type {
-  /* The top logo row was the first div – we’ll wrap everything visually */
-}
+/* App shell */
 
-/* Main app container */
 .app-shell {
   width: 100%;
-  max-width: 1100px;
-  margin: 24px auto 48px auto;
-  padding: 24px 20px 32px 20px;
-  background: rgba(15, 23, 42, 0.85);
-  border-radius: 18px;
-  box-shadow: 0 24px 60px rgba(0,0,0,0.55);
-  backdrop-filter: blur(16px);
+  max-width: 480px;
+  margin: 12px auto;
+  padding: 16px;
+  border-radius: 24px;
+  background: radial-gradient(circle at top left, rgba(26, 223, 123, 0.12), transparent 55%),
+    rgba(9, 11, 26, 0.96);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.7);
 }
 
-/* Make sure your existing top logo row still looks centred */
+/* Header */
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #f7f9fc;
+}
+
 .headIco {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 999px;
-  box-shadow: 0 0 0 2px rgba(148, 163, 184, 0.6);
+  box-shadow: 0 0 0 2px rgba(32, 236, 149, 0.4);
 }
 
-/* Header title text */
-body > div:nth-of-type(1) {
-  margin-bottom: 10px;
-  color: #e5e7eb;
-}
+/* Tabs */
 
-/* Center that header row inside the app shell */
-body > div:nth-of-type(1),
-body > div:nth-of-type(2),
-body > div:nth-of-type(3),
-.mainbox,
-.box3,
-.buttonBox,
-.treeBox {
-  max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
+.tab-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+  background: rgba(8, 14, 28, 0.9);
+  padding: 4px;
+  border-radius: 999px;
 }
-
-/* ===== Tabs ===== */
 
 .tab {
   flex: 1;
-  padding: 10px 12px;
   text-align: center;
+  padding: 8px 10px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: 999px;
   cursor: pointer;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #e5e7eb;
-  background: rgba(31, 41, 55, 0.9);
-  border-radius: 12px 12px 0 0;
-  transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    transform 0.15s ease,
-    box-shadow 0.15s ease;
-  border: 1px solid rgba(75, 85, 99, 0.8);
-  border-bottom: none;
-}
-
-.tab + .tab {
-  margin-left: 4px;
-}
-
-.tab:hover {
-  background: rgba(55, 65, 81, 0.95);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+  transition: all 0.18s ease;
+  color: #a9b4ca;
+  background: transparent;
 }
 
 #tab1 {
-  border-top-left-radius: 18px;
+  /* default active */
+  background: linear-gradient(135deg, #18c964, #28df7b);
+  color: #061218;
+  font-weight: 600;
+  box-shadow: 0 0 16px rgba(24, 201, 100, 0.45);
 }
 
-#tab2 {
-  border-top-right-radius: 18px;
+.tab:hover {
+  transform: translateY(-1px);
 }
 
-/* Selected tab (you already manipulate background/transform in JS) */
-#tab1,
-#tab2 {
-  /* leave colors to JS overrides; this just smooths things */
-}
-
-/* Tab row container */
-body > div:nth-of-type(2) {
-  max-width: 1100px;
-  margin-top: 16px;
-}
-
-/* ===== Main content boxes ===== */
+/* Main layout */
 
 .mainbox {
-  background: rgba(15, 23, 42, 0.9);
-  border: 1px solid rgba(55, 65, 81, 0.9);
-  border-top: none;
-  border-radius: 0 0 18px 18px;
-  padding: 18px 16px 22px 16px;
-  margin-bottom: 18px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  flex-direction: column;
+  gap: 12px;
 }
 
-/* Left side inputs */
-.leftContainer {
-  flex: 1 1 320px;
-  min-width: 280px;
-}
+/* Common card */
 
-/* Building levels panel */
-.box2 {
-  flex: 0 0 280px;
-  max-width: 320px;
-  background: rgba(15, 23, 42, 0.9);
-  border-radius: 14px;
-  border: 1px solid rgba(55,65,81,0.9);
-  padding: 12px 14px 16px 14px;
-}
-
-/* Extractor qty panel (when visible) */
+.card,
+.box2,
+.box3,
 .box4 {
-  margin-top: 14px;
-  background: rgba(15,23,42,0.9);
-  border-radius: 14px;
-  border: 1px solid rgba(55,65,81,0.9);
-  padding: 10px 12px 12px 12px;
+  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.02), transparent 55%),
+    rgba(8, 12, 26, 0.98);
+  border-radius: 20px;
+  padding: 14px 14px 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(81, 98, 130, 0.4);
 }
 
 /* Titles */
+
+.card-title,
 .box2 > div:first-child,
-.box4 > div:first-child,
-.box3 > div:first-child {
-  font-weight: 600;
-  letter-spacing: 0.03em;
+.box3 > div:first-child,
+.box4 > div:first-child {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
-  font-size: 0.78rem;
-  color: #9ca3af;
+  margin-bottom: 8px;
+  color: #cfd8ea;
 }
 
-/* Sub-box layouts */
+/* Form fields */
+
+.matinput {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.field-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #cfd8ea;
+}
+
+.field-input {
+  display: flex;
+  justify-content: center;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  max-width: 200px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(92, 116, 148, 0.7);
+  background: rgba(7, 11, 26, 0.95);
+  color: #e4ecf4;
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+input[type="text"]:focus,
+select:focus {
+  border-color: #28df7b;
+  box-shadow: 0 0 0 1px rgba(40, 223, 123, 0.55);
+  background: rgba(7, 11, 26, 1);
+}
+
+/* Level + extractor grid */
+
 .subbox2 {
-  margin-top: 10px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -182,272 +199,152 @@ body > div:nth-of-type(2) {
 .levelfact {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.9rem;
-  color: #e5e7eb;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.levelfact.center {
+  justify-content: center;
 }
 
 .tablecell {
-  min-width: 80px;
-  text-align: right;
-  padding-right: 4px;
+  flex: 1;
+  text-align: left;
+  font-size: 0.82rem;
+  color: #d2d9eb;
 }
 
-/* Inputs & selects */
-input[type="text"],
-select {
-  background: rgba(15, 23, 42, 0.95);
-  color: #e5e7eb;
-  border-radius: 8px;
-  border: 1px solid rgba(55,65,81,0.9);
-  padding: 4px 6px;
-  font-size: 0.9rem;
-  outline: none;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+.levelfact select,
+.levelfact input[type="text"] {
+  max-width: 70px;
 }
 
-input[type="text"]:focus,
-select:focus {
-  border-color: #22c55e;
-  box-shadow: 0 0 0 1px rgba(34,197,94,0.7);
-  background: rgba(15,23,42,1);
+/* Buttons */
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  margin: 12px 0 4px;
 }
 
-select {
-  appearance: none;
-}
-
-/* Dropdown caret fallback for some browsers */
-select::-ms-expand {
-  display: none;
-}
-
-/* Rate & material blocks */
-.matinput {
-  background: rgba(15, 23, 42, 0.9);
-  border-radius: 14px;
-  border: 1px solid rgba(55,65,81,0.9);
-  padding: 8px 10px 10px 10px;
-  margin-bottom: 10px;
-}
-
-/* ===== Buttons ===== */
-
-button {
-  cursor: pointer;
+.btn-primary,
+.btn-secondary {
   border-radius: 999px;
-  border: none;
-  padding: 10px 16px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
+  padding: 10px 22px;
+  font-size: 0.9rem;
+  font-weight: 700;
   text-transform: uppercase;
-  background: linear-gradient(135deg, #22c55e, #16a34a);
-  color: #f9fafb;
-  box-shadow: 0 12px 30px rgba(22,163,74,0.4);
-  transition:
-    transform 0.12s ease,
-    box-shadow 0.12s ease,
-    filter 0.12s ease,
-    background 0.12s ease;
+  letter-spacing: 0.12em;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
 }
 
-button:hover {
-  filter: brightness(1.05);
+.btn-primary {
+  background: radial-gradient(circle at 0% 0%, #2cf07c, #10a049);
+  color: #051012;
+  box-shadow: 0 12px 22px rgba(22, 200, 110, 0.65);
+}
+
+.btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 16px 40px rgba(22,163,74,0.55);
+  filter: brightness(1.06);
 }
 
-button:active {
-  transform: translateY(0);
-  box-shadow: 0 8px 20px rgba(22,163,74,0.35);
+.btn-primary:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 6px 14px rgba(22, 200, 110, 0.55);
 }
 
-#calculate1,
-#calculate2 {
-  margin-top: 10px;
-}
-
-/* Max All button */
-#max_all_level button {
-  padding: 6px 12px;
+.btn-secondary {
+  background: rgba(12, 26, 48, 0.95);
+  color: #e4ecf4;
+  border: 1px solid rgba(122, 147, 190, 0.7);
+  padding: 6px 16px;
   font-size: 0.8rem;
 }
 
-/* ===== Total required / results box ===== */
-
-.box3 {
-  margin-top: 16px;
-  padding: 12px 14px 16px 14px;
-  background: rgba(15,23,42,0.9);
-  border-radius: 14px;
-  border: 1px solid rgba(55,65,81,0.9);
-  color: #e5e7eb;
+.btn-secondary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(7, 10, 25, 0.9);
 }
 
-/* Limiting resource banner (same .box3) */
-#limit_resource {
-  margin-top: 16px;
-  background: linear-gradient(135deg, rgba(239,68,68,0.12), rgba(252,211,77,0.12));
-  border-color: rgba(248,113,113,0.8);
-  color: #fecaca;
-  font-size: 0.9rem;
-}
+/* Totals list */
 
-/* Total results grid */
 .subbox3 {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
+  gap: 6px;
+  margin-top: 8px;
 }
 
 .matsum {
   display: flex;
   align-items: center;
+  gap: 6px;
   padding: 6px 8px;
   border-radius: 999px;
-  background: rgba(17,24,39,0.9);
-  border: 1px solid rgba(55,65,81,0.85);
-  min-width: 110px;
+  background: rgba(6, 10, 22, 0.9);
+  border: 1px solid rgba(69, 86, 115, 0.6);
+  min-width: 130px;
 }
 
 .matsum .ico {
-  margin-right: 6px;
+  width: 22px;
+  height: 22px;
 }
 
 .matout {
-  font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.78rem;
 }
 
-/* ===== Tree / recipe view ===== */
+/* Buttons for tiers & tree */
 
-.treeBox {
-  margin-top: 18px;
-  padding: 12px;
-  border-radius: 14px;
-  background: rgba(15,23,42,0.92);
-  border: 1px solid rgba(55,65,81,0.9);
-  overflow-x: auto;
-}
-
-.treeLevel {
-  display: flex;
-  align-items: center;
-}
-
-/* Material detail nodes */
-.matBox {
-  display: inline-flex;
-  align-items: center;
-  background: rgba(15,23,42,1);
-  border-radius: 999px;
-  border: 1px solid rgba(55,65,81,0.9);
-  padding: 4px 8px;
-  margin: 4px 8px;
-  cursor: pointer;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
-}
-
-.matDetail {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.matName {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.matRate,
-.factoryName,
-.factoryNum {
-  font-size: 0.85rem;
-  color: #9ca3af;
-}
-
-.factoryNum {
-  font-weight: 600;
-  color: #e5e7eb;
-}
-
-.branchBox {
-  display: flex;
-  align-items: center;
-}
-
-.branchSimple,
-.branchDown,
-.branchEnd {
-  /* You likely already style these in your original CSS;
-     we keep them subtle here. */
-}
-
-/* Expand/collapse +/- */
-.plusMinus img {
-  display: block;
-}
-
-/* Tier buttons */
 .buttonBox {
+  margin-top: 10px;
   display: none;
   justify-content: center;
   gap: 4px;
-  margin-top: 16px;
 }
 
-.buttonStart,
-.buttonMid,
-.buttonEnd {
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(31,41,55,0.9);
-  border: 1px solid rgba(75,85,99,0.9);
-  color: #e5e7eb;
-  font-size: 0.8rem;
+.buttonBox > div {
   cursor: pointer;
-  transition: background 0.15s ease, transform 0.12s ease;
+  padding: 5px 9px;
+  font-size: 0.75rem;
+  border-radius: 999px;
+  background: rgba(16, 24, 45, 0.95);
+  color: #cfd8ea;
+  border: 1px solid rgba(82, 101, 142, 0.8);
 }
 
-.buttonStart:hover,
-.buttonMid:hover,
-.buttonEnd:hover {
-  background: rgba(55,65,81,0.95);
-  transform: translateY(-1px);
+.treeBox {
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 18px;
+  background: rgba(5, 9, 20, 0.95);
+  overflow-x: auto;
 }
 
-/* ===== Responsive tweaks ===== */
-
-@media (max-width: 800px) {
-  body {
-    align-items: stretch;
-  }
-
-  .mainbox {
-    flex-direction: column;
-  }
-
-  .box2 {
-    max-width: 100%;
-  }
-
-  .matsum {
-    min-width: calc(50% - 8px);
-  }
-}
+/* Responsive tweaks */
 
 @media (max-width: 520px) {
-  .matsum {
-    min-width: 100%;
+  .app-shell {
+    margin: 8px;
+    padding: 12px;
   }
 
-  .tab {
-    font-size: 0.8rem;
-    padding: 8px 6px;
+  .app-header h1 {
+    font-size: 0.95rem;
+  }
+
+  .headIco {
+    width: 28px;
+    height: 28px;
+  }
+
+  .matsum {
+    min-width: 120px;
   }
 }
