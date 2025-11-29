@@ -235,54 +235,98 @@ function reversefactorycalc() {
 
 function calculate(material, rate, divParentId, boxId) {
   var divParent = document.getElementById(divParentId);
-  var matChildren = document.createElement('div');
-  var treeLevel = document.createElement('div');
-  var branchBox = document.createElement('div');
-  var matBox = document.createElement('div');
-  var tempParentId = 0
+  var tempParentId = 0;
 
   if (material.recipe == 0) {
-    //raw material with no recipe 
-    createMatDetail(material.name, rate, factoryname(material.factory[0]), Math.ceil((rate / material.factory[1]) * 100) / 100, divParentId, 'matDet' + boxId, material.ID)
-    //add the material to the total required
+    // Raw material with no recipe
+    createMatDetail(
+      material.name,
+      rate,
+      factoryname(material.factory[0]),
+      Math.ceil((rate / material.factory[1]) * 100) / 100,
+      divParentId,
+      "matDet" + boxId,
+      material.ID
+    );
+
+    // Add the material to the total required
     materialtotal[material.ID] = materialtotal[material.ID] + rate;
   } else {
-    //create a Material box with the material detail
-    createMatBox(material.name, rate, factoryname(material.factory[0]), Math.ceil(rate / material.factory[1]), divParentId, 'matBox' + boxId, material.ID)
-    //add the material to the total required
+    // Create a Material box with the material detail
+    createMatBox(
+      material.name,
+      rate,
+      factoryname(material.factory[0]),
+      Math.ceil(rate / material.factory[1]),
+      divParentId,
+      "matBox" + boxId,
+      material.ID
+    );
+
+    // Add the material to the total required
     materialtotal[material.ID] = materialtotal[material.ID] + rate;
-    //store the current Id and create a MatChildren box to contain the material(s) required in the recipe
-    createMatChildren(divParentId, 'child' + boxId);
+
+    // Create a MatChildren box to contain the recipe items
+    createMatChildren(divParentId, "child" + boxId);
     tempParentId = boxId;
     boxId = boxId + 10000;
+
     if (material.recipe.length == 1) {
-      // there is only one material required
-      boxId = boxId + 1
-      createTreeLevel('child' + tempParentId, 'tree' + boxId);
-      createBranchStraight('tree' + boxId);
-      boxId = calculate(material.recipe[0], material.quantity[0] * rate, 'tree' + boxId, boxId);
+      // Only one ingredient
+      boxId = boxId + 1;
+      createTreeLevel("child" + tempParentId, "tree" + boxId);
+      createBranchStraight("tree" + boxId);
+      boxId = calculate(
+        material.recipe[0],
+        material.quantity[0] * rate,
+        "tree" + boxId,
+        boxId
+      );
     } else {
-      // there is more than one material required
-      for (var i = 0; i < material.recipe.length; i++) {
-        boxId = boxId + 1
-        createTreeLevel('child' + tempParentId, 'tree' + boxId);
-        if (i == 0) {
-          //it is the first item in the recipe - create a branch going down'
-          createBranchDown('tree' + boxId);
+      // Multiple ingredients – build a list and sort it
+      var ingredients = material.recipe.map(function (mat, idx) {
+        return {
+          mat: mat,
+          qty: material.quantity[idx],
+          // total rate this ingredient needs
+          requiredRate: material.quantity[idx] * rate
+        };
+      });
+
+      // Sort descending: biggest requirement first
+      ingredients.sort(function (a, b) {
+        return b.requiredRate - a.requiredRate;
+      });
+
+      // Draw each ingredient in sorted order
+      for (var k = 0; k < ingredients.length; k++) {
+        var ing = ingredients[k];
+        boxId = boxId + 1;
+        createTreeLevel("child" + tempParentId, "tree" + boxId);
+
+        if (k === 0) {
+          // first item – branch down
+          createBranchDown("tree" + boxId);
+        } else if (k < ingredients.length - 1) {
+          // middle items – fork
+          createBranchFork("tree" + boxId);
         } else {
-          if (i < material.recipe.length - 1) {
-            //it is neither the first or last item in the recipe - create a fork')              
-            createBranchFork('tree' + boxId);
-          } else {
-            //it is the last item in the recipe - create a branch end
-            createBranchEnd('tree' + boxId);
-          }
+          // last item – branch end
+          createBranchEnd("tree" + boxId);
         }
-        boxId = calculate(material.recipe[i], material.quantity[i] * rate, 'tree' + boxId, boxId);
+
+        boxId = calculate(
+          ing.mat,
+          ing.qty * rate,
+          "tree" + boxId,
+          boxId
+        );
       }
     }
+
     boxId = boxId - 10000;
   }
+
   return boxId;
 }
 
