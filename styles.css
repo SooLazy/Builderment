@@ -1,4 +1,30 @@
-/* Base */
+/* ===========================
+   Global + Layout
+   =========================== */
+
+:root {
+  --bg-main: #020617;            /* page background */
+  --bg-card: rgba(15, 23, 42, 0.94);
+  --bg-card-soft: rgba(15, 23, 42, 0.86);
+  --bg-pill: rgba(15, 23, 42, 0.9);
+  --border-soft: rgba(148, 163, 184, 0.35);
+  --border-strong: rgba(148, 163, 184, 0.6);
+  --accent: #22c55e;
+  --accent-soft: rgba(34, 197, 94, 0.12);
+  --accent-strong: #4ade80;
+  --text-main: #e5e7eb;
+  --text-soft: #9ca3af;
+  --text-faint: #6b7280;
+  --danger: #f97373;
+
+  --tree-line: rgba(148, 163, 184, 0.6);
+  --radius-xl: 24px;
+  --radius-lg: 18px;
+  --radius-pill: 999px;
+
+  --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.5);
+  --shadow-subtle: 0 10px 30px rgba(15, 23, 42, 0.8);
+}
 
 *,
 *::before,
@@ -6,148 +32,123 @@
   box-sizing: border-box;
 }
 
-html,
-body {
+html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  color: #e4ecf4;
 }
 
 body {
-  background: radial-gradient(circle at top, #22334a 0, #050816 55%, #02040a 100%);
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: var(--text-main);
+  background-color: var(--bg-main);
+  /* background-image is set inline in HTML – keep it but soften with overlay */
 }
 
-/* Background image behind the glass card */
-
-.page-bg {
-  position: fixed;
-  inset: 0;
-  background-image: url("https://raw.githubusercontent.com/saprolord/saprolord.github.io/main/image/Builderment_Bck2b.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  filter: blur(4px) brightness(0.4);
-  z-index: -1;
-}
-
-/* App shell */
-
+/* Frosted glass overlay on top of background image */
 .app-shell {
+  min-height: 100vh;
   width: 100%;
-  max-width: 480px;
-  margin: 12px auto;
-  padding: 16px;
-  border-radius: 24px;
-  background: radial-gradient(circle at top left, rgba(26, 223, 123, 0.12), transparent 55%),
-    rgba(9, 11, 26, 0.96);
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.7);
-}
-
-/* Header */
-
-.app-header {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 12px;
+  padding: 12px 10px 40px 10px;
+  background: radial-gradient(circle at top, rgba(15, 23, 42, 0.7), transparent),
+              linear-gradient(to bottom, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
 }
 
-.app-header h1 {
-  margin: 0;
-  font-size: 1.1rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #f7f9fc;
-}
+/* ===========================
+   Header
+   =========================== */
 
 .headIco {
   width: 32px;
   height: 32px;
-  border-radius: 999px;
-  box-shadow: 0 0 0 2px rgba(32, 236, 149, 0.4);
+  border-radius: 8px;
+  box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.8);
 }
 
-/* Tabs */
-
-.tab-row {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 14px;
-  background: rgba(8, 14, 28, 0.9);
-  padding: 4px;
-  border-radius: 999px;
-}
+/* ===========================
+   Tabs
+   =========================== */
 
 .tab {
   flex: 1;
   text-align: center;
   padding: 8px 10px;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  border-radius: 18px 18px 0 0;
+  background: rgba(75, 85, 99, 0.6);
   cursor: pointer;
-  transition: all 0.18s ease;
-  color: #a9b4ca;
-  background: transparent;
+  user-select: none;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-bottom: none;
+  letter-spacing: 0.02em;
+  transition: background 0.18s ease, color 0.18s ease,
+              transform 0.18s ease, box-shadow 0.18s ease;
 }
 
-#tab1 {
-  /* default active */
-  background: linear-gradient(135deg, #18c964, #28df7b);
-  color: #061218;
-  font-weight: 600;
-  box-shadow: 0 0 16px rgba(24, 201, 100, 0.45);
+.tab:first-child {
+  margin-right: 6px;
+}
+
+.tab:last-child {
+  margin-left: 6px;
+}
+
+#tab1,
+#tab2 {
+  /* JS toggles background/transform – we just define the “active” look */
 }
 
 .tab:hover {
-  transform: translateY(-1px);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.7);
 }
 
-/* Main layout */
+#tab1[style*="background-color:#10a049"],
+#tab2[style*="background-color:#10a049"] {
+  /* active state (when JS sets inline background-color) */
+  background: radial-gradient(circle at top left, #22c55e, #15803d);
+  color: #ecfdf5;
+}
+
+/* ===========================
+   Main layout boxes
+   =========================== */
 
 .mainbox {
+  width: 100%;
+  max-width: 480px;
+  margin: 10px auto 0 auto;
+  border-radius: var(--radius-xl);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-soft);
+  padding: 14px 14px 22px 14px;
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-/* Common card */
-
-.card,
-.box2,
-.box3,
-.box4 {
-  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.02), transparent 55%),
-    rgba(8, 12, 26, 0.98);
-  border-radius: 20px;
-  padding: 14px 14px 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(81, 98, 130, 0.4);
+.leftContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-/* Titles */
-
-.card-title,
-.box2 > div:first-child,
-.box3 > div:first-child,
-.box4 > div:first-child {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-  color: #cfd8ea;
+.tabBox {
+  background: var(--bg-card-soft);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-soft);
+  padding: 14px 14px 10px 14px;
+  box-shadow: var(--shadow-subtle);
 }
 
-/* Form fields */
+/* ===========================
+   Inputs
+   =========================== */
 
 .matinput {
   display: flex;
@@ -156,39 +157,64 @@ body {
   margin-bottom: 10px;
 }
 
-.field-label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #cfd8ea;
-}
-
-.field-input {
-  display: flex;
-  justify-content: center;
-}
-
-input[type="text"],
-select {
-  width: 100%;
-  max-width: 200px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(92, 116, 148, 0.7);
-  background: rgba(7, 11, 26, 0.95);
-  color: #e4ecf4;
+.matinput > div:first-child {
   font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-soft);
+}
+
+#rate {
+  background: var(--bg-pill);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-soft);
+  padding: 8px 10px;
+  color: var(--text-main);
+  font-size: 0.9rem;
+  text-align: center;
   outline: none;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.8);
 }
 
-input[type="text"]:focus,
-select:focus {
-  border-color: #28df7b;
-  box-shadow: 0 0 0 1px rgba(40, 223, 123, 0.55);
-  background: rgba(7, 11, 26, 1);
+#rate::placeholder {
+  color: var(--text-faint);
 }
 
-/* Level + extractor grid */
+#material {
+  width: 100%;
+  max-width: 260px;
+  background: var(--bg-pill);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-soft);
+  padding: 8px 12px;
+  color: var(--text-main);
+  font-size: 0.9rem;
+  outline: none;
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.9);
+}
+
+/* ===========================
+   Extractor quantity block
+   =========================== */
+
+.box4 {
+  margin-top: 8px;
+  padding: 12px;
+  border-radius: var(--radius-lg);
+  background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.9));
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.box4 > div:first-child {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--text-soft);
+}
 
 .subbox2 {
   display: flex;
@@ -199,96 +225,170 @@ select:focus {
 .levelfact {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  margin-top: 4px;
+  gap: 6px;
+  font-size: 0.85rem;
 }
 
-.levelfact.center {
-  justify-content: center;
+.levelfact .tablecell {
+  width: 80px;
+  text-align: right;
+  color: var(--text-soft);
 }
 
-.tablecell {
-  flex: 1;
-  text-align: left;
-  font-size: 0.82rem;
-  color: #d2d9eb;
-}
-
-.levelfact select,
-.levelfact input[type="text"] {
-  max-width: 70px;
-}
-
-/* Buttons */
-
-.button-row {
-  display: flex;
-  justify-content: center;
-  margin: 12px 0 4px;
-}
-
-.btn-primary,
-.btn-secondary {
-  border-radius: 999px;
-  padding: 10px 22px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  border: none;
-  cursor: pointer;
+#extractor_qty input[type="text"] {
+  background: var(--bg-pill);
+  color: var(--text-main);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-soft);
+  padding: 5px 8px;
+  font-size: 0.85rem;
   outline: none;
+}
+
+/* ===========================
+   Building level block
+   =========================== */
+
+.box2 {
+  margin-top: 8px;
+  padding: 12px;
+  border-radius: var(--radius-lg);
+  background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.95));
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.box2 > div:first-child {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--text-soft);
+}
+
+#max_all_level {
+  margin-bottom: 2px;
+}
+
+#max_all_level button {
+  border-radius: var(--radius-pill);
+  border: none;
+  padding: 6px 16px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: radial-gradient(circle at top left, var(--accent), var(--accent-strong));
+  color: #ecfdf5;
+  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.8),
+              0 0 25px rgba(34, 197, 94, 0.5);
+  cursor: pointer;
   transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
 }
 
-.btn-primary {
-  background: radial-gradient(circle at 0% 0%, #2cf07c, #10a049);
-  color: #051012;
-  box-shadow: 0 12px 22px rgba(22, 200, 110, 0.65);
-}
-
-.btn-primary:hover {
+#max_all_level button:hover {
   transform: translateY(-1px);
   filter: brightness(1.06);
 }
 
-.btn-primary:active {
-  transform: translateY(1px) scale(0.98);
-  box-shadow: 0 6px 14px rgba(22, 200, 110, 0.55);
+#max_all_level button:active {
+  transform: translateY(0px) scale(0.98);
+  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.8),
+              0 0 10px rgba(34, 197, 94, 0.4);
 }
 
-.btn-secondary {
-  background: rgba(12, 26, 48, 0.95);
-  color: #e4ecf4;
-  border: 1px solid rgba(122, 147, 190, 0.7);
-  padding: 6px 16px;
+#levelfact .subbox2 {
+  margin-top: 4px;
+}
+
+#levelfact select {
+  width: 46px;
+  background: var(--bg-pill);
+  color: var(--text-main);
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  text-align: center;
   font-size: 0.8rem;
+  padding: 4px 0;
+  outline: none;
 }
 
-.btn-secondary:hover {
+/* ===========================
+   Primary buttons (Calculate)
+   =========================== */
+
+button#calculate1,
+button#calculate2 {
+  margin-top: 10px;
+  border-radius: var(--radius-pill);
+  border: none;
+  padding: 11px 16px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  background: radial-gradient(circle at top left, var(--accent), var(--accent-strong));
+  color: #ecfdf5;
+  cursor: pointer;
+  box-shadow: 0 18px 30px rgba(22, 163, 74, 0.4);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+}
+
+button#calculate1:hover,
+button#calculate2:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(7, 10, 25, 0.9);
+  filter: brightness(1.07);
 }
 
-/* Totals list */
+button#calculate1:active,
+button#calculate2:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 10px 20px rgba(22, 163, 74, 0.35);
+}
+
+/* ===========================
+   Totals panel
+   =========================== */
+
+.box3 {
+  margin: 14px auto 0 auto;
+  padding: 12px 12px 14px 12px;
+  width: 100%;
+  max-width: 480px;
+  border-radius: var(--radius-xl);
+  background: radial-gradient(circle at top, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.85rem;
+}
+
+.box3 > div:first-child {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-soft);
+}
 
 .subbox3 {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 8px;
 }
 
 .matsum {
+  flex: 0 0 calc(50% - 4px);
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   padding: 6px 8px;
-  border-radius: 999px;
-  background: rgba(6, 10, 22, 0.9);
-  border: 1px solid rgba(69, 86, 115, 0.6);
-  min-width: 130px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(31, 41, 55, 0.9);
 }
 
 .matsum .ico {
@@ -297,243 +397,270 @@ select:focus {
 }
 
 .matout {
-  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-main);
 }
 
-/* Buttons for tiers & tree */
+/* ===========================
+   Limit resource banner
+   =========================== */
+
+#limit_resource {
+  margin-top: 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(55, 65, 81, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  color: var(--accent-strong);
+  font-size: 0.8rem;
+}
+
+/* ===========================
+   Tier buttons (1,2,3,4…)
+   =========================== */
 
 .buttonBox {
-  margin-top: 10px;
-  display: none;
+  margin: 10px auto 0 auto;
+  display: none; /* JS shows/hides */
   justify-content: center;
   gap: 4px;
 }
 
-.buttonBox > div {
-  cursor: pointer;
+.buttonStart,
+.buttonMid,
+.buttonEnd {
   padding: 5px 9px;
-  font-size: 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 500;
   border-radius: 999px;
-  background: rgba(16, 24, 45, 0.95);
-  color: #cfd8ea;
-  border: 1px solid rgba(82, 101, 142, 0.8);
+  border: 1px solid var(--border-soft);
+  color: var(--text-soft);
+  background: rgba(15, 23, 42, 0.9);
+  cursor: pointer;
+  min-width: 26px;
+  text-align: center;
+  transition: background 0.14s ease, color 0.14s ease, transform 0.12s ease;
 }
+
+.buttonStart:hover,
+.buttonMid:hover,
+.buttonEnd:hover {
+  background: rgba(34, 197, 94, 0.2);
+  color: var(--accent-strong);
+  transform: translateY(-1px);
+}
+
+/* ===========================
+   Tree View
+   =========================== */
 
 .treeBox {
-  margin-top: 12px;
-  padding: 10px;
-  border-radius: 18px;
-  background: rgba(5, 9, 20, 0.95);
+  margin: 14px auto 0 auto;
+  width: 100%;
+  max-width: 1100px;
+  padding: 16px 12px 18px 12px;
+  border-radius: var(--radius-xl);
+  background: radial-gradient(circle at top, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.99));
+  border: 1px solid rgba(30, 64, 175, 0.4);
+  box-shadow: var(--shadow-soft);
   overflow-x: auto;
 }
-/* =========================
-   TREE VIEW LAYOUT
-   ========================= */
 
-.treeBox {
-  margin-top: 12px;
-  padding: 10px;
-  border-radius: 18px;
-  background: rgba(5, 9, 20, 0.95);
-  overflow-x: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-/* Each "tier" across the tree */
+/* One row: connector + node + children */
 .treeLevel {
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 10px;
-  min-height: 40px;
+  align-items: center;
+  gap: 18px;
+  min-height: 84px;
+  padding: 6px 0;
 }
 
-/* Branch graphics between parent and children */
-
+/* Column of connectors between levels */
 .branchBox {
   display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  justify-content: flex-end;
-  width: 32px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  min-height: 84px;
+  position: relative;
 }
 
-/* horizontal line:  ─  */
+/* Horizontal-only connector (─) */
 .branchSimple {
-  flex: 1;
-  border-bottom: 2px solid rgba(96, 118, 160, 0.8);
+  width: 100%;
+  height: 2px;
+  background: var(--tree-line);
 }
 
-/* vertical continuation:  │  */
+/* Vertical-only connector (│) – used when chain continues down */
 .branchDown {
-  width: 0;
-  border-left: 2px solid rgba(96, 118, 160, 0.8);
-  margin: 0 auto;
-}
-
-/* corner end:  └  */
-.branchEnd {
+  width: 2px;
   flex: 1;
-  border-bottom: 2px solid rgba(96, 118, 160, 0.8);
-  border-left: 2px solid rgba(96, 118, 160, 0.8);
-  border-bottom-left-radius: 12px;
-  margin-left: auto;
+  background: var(--tree-line);
 }
 
-/* Material box (clickable, with +/-) */
+/* End connector (└─) */
+.branchEnd {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.branchEnd::before,
+.branchEnd::after {
+  content: "";
+  position: absolute;
+  background: var(--tree-line);
+}
+
+/* vertical part */
+.branchEnd::before {
+  left: 50%;
+  top: 0;
+  bottom: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+}
+
+/* horizontal part */
+.branchEnd::after {
+  left: 50%;
+  bottom: 50%;
+  right: 0;
+  height: 2px;
+}
+
+/* Fork connector (├─ with vertical passing through) */
+.branchBox .branchEnd + .branchDown {
+  /* handled by HTML order in createBranchFork */
+}
+
+.branchBox .branchEnd + .branchDown::before {
+  content: "";
+}
+
+/* ===========================
+   Material Cards in Tree
+   =========================== */
 
 .matBox {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 10px;
-  border-radius: 14px;
-  background: radial-gradient(circle at top left,
-              rgba(255, 255, 255, 0.02),
-              transparent 60%)
-              rgba(10, 14, 30, 0.98);
-  border: 1px solid rgba(78, 100, 142, 0.8);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.55);
-  cursor: pointer;
-  min-width: 210px;
-}
-
-.matBox .plusMinus img {
-  display: block;
-}
-
-/* Children container (stack of sub-materials) */
-
-.matChildren {
-  display: flex;
-  flex-direction: column;
+  align-items: stretch;
   gap: 8px;
-  margin-left: 40px; /* offset under the branch */
+  padding: 8px 10px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.94));
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.8);
+  position: relative;
+  min-width: 220px;
 }
 
-/* The inner detail row inside a material */
-
-/* Layout inside each material card in the tree */
-.matDetail {
-  display: grid;
-  grid-template-columns: minmax(0, 1.7fr) auto;
-  grid-template-rows: auto auto;
-  grid-template-areas:
-    "name rate"
-    "factory qty";
-  column-gap: 6px;
-  row-gap: 2px;
-  align-items: center;
-  font-size: 0.8rem;
+.matBox:hover {
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.95);
 }
 
-/* Top-left: icon + material name */
-.matName {
-  grid-area: name;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: 500;
-  color: #e6edf8;
-}
-
-/* Top-right: rate */
-.matRate {
-  grid-area: rate;
-  text-align: right;
-  color: #cfd8ea;
-}
-
-/* Bottom-left: factory name */
-.factoryName {
-  grid-area: factory;
-  color: #9aa6c2;
-  font-size: 0.75rem;
-}
-
-/* Bottom-right: number of factories */
-.factoryNum {
-  grid-area: qty;
-  text-align: right;
-  font-weight: 600;
-  color: #f7f9fc;
-}
-/* ===== Tree layout alignment ===== */
-
-.treeBox {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-/* Each horizontal row in the tree */
-.treeLevel {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-/* Column of children under a parent */
-.matChildren {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-/* The little line/branch column */
-.branchBox {
-  flex: 0 0 40px;
+.plusMinus {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-left: 6px;
+  cursor: pointer;
 }
 
-/* Material card in the tree */
-.matBox {
-  flex: 1 1 auto;
+/* Inner content of a node */
+.matDetail {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) auto;
+  grid-template-rows: auto auto;
+  column-gap: 10px;
+  row-gap: 2px;
+  align-items: center;
+  min-width: 0;
+}
+
+.matName {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
   display: flex;
   align-items: center;
-  min-height: 70px;        /* makes each row same height so branches line up */
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
-/* Make the inner details stretch to full width of the card */
-.matDetail {
-  width: 100%;
+.matName .ico {
+  width: 22px;
+  height: 22px;
 }
+
+.matRate {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.86rem;
+  color: var(--accent-strong);
+}
+
+.factoryName {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+  font-size: 0.78rem;
+  color: var(--text-soft);
+}
+
+.factoryNum {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  text-align: right;
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-main);
+}
+
 .spacer {
   display: none;
 }
 
-.matDetail .ico {
-  width: 20px;
-  height: 20px;
+/* Children column */
+.matChildren {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: 18px;
 }
-/* Small icons inside the tree */
-.matDetail .ico {
-  width: 20px;
-  height: 20px;
+
+/* ===========================
+   Icons in totals & tree
+   =========================== */
+
+.ico {
+  display: inline-block;
 }
-/* Responsive tweaks */
 
-@media (max-width: 520px) {
-  .app-shell {
-    margin: 8px;
-    padding: 12px;
+/* ===========================
+   Responsive tweaks
+   =========================== */
+
+@media (min-width: 768px) {
+  .mainbox {
+    max-width: 600px;
   }
 
-  .app-header h1 {
-    font-size: 0.95rem;
+  .box3 {
+    max-width: 600px;
   }
+}
 
-  .headIco {
-    width: 28px;
-    height: 28px;
-  }
-
+@media (max-width: 480px) {
   .matsum {
-    min-width: 120px;
+    flex: 0 0 100%;
+  }
+
+  .treeBox {
+    padding-bottom: 24px;
   }
 }
